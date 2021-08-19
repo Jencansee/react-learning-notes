@@ -15,10 +15,20 @@ const App = () => {
     setExpenses(prevState => { return [expectedData, ...prevState] })
   };
 
+  const itemToRemove = target => { 
+    expenses.map(el => {
+      if (el.id === target) {
+        if(expenses.indexOf(el) !== -1) expenses.splice(expenses.indexOf(el), 1)
+        setExpenses(() => { return [...expenses] });
+      }
+      return expenses
+    });
+  };
+
   return (
     <div className="App">
       <NewExpense expectedExpenseData={expectedExpenseDataHandler} />
-      <Expenses className="expenses" arr={expenses} />
+      <Expenses className="expenses" arr={expenses} itemToRemove={itemToRemove} />
     </div>
   );
 }

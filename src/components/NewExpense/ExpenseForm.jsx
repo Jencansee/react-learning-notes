@@ -9,13 +9,12 @@ const ExpenseForm = (props) => {
     date: ''
   });
 
-
   const titleChangeHandler = e => setUserInput(prevState => {
     return { ...prevState, title: e.target.value };
   });
 
   const amountChangeHandler = e => setUserInput(prevState => {
-    return { ...prevState, amount: e.target.value };
+    return { ...prevState, amount: +e.target.value };
   });
 
   const dateChangeHandler = e => setUserInput(prevState => {
@@ -29,6 +28,7 @@ const ExpenseForm = (props) => {
     
     // Обнуляем все, мб есть лучше метод?
     setUserInput({title: '', amount: '', enteredDate: '', date: ''});
+    props.toggleAdding();
   };
 
   return (
@@ -50,6 +50,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="submit" onClick={props.toggleAdding}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
