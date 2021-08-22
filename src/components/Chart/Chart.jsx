@@ -1,12 +1,17 @@
 import ChartBar from './ChartBar';
-import './Chart.css';
+import styled from 'styled-components';
+
+const StyledChart = styled.div`
+  height: 10rem; padding: 1rem; border-radius: 12px; 
+  background-color: #f8dfff; display: flex; text-align: center; justify-content: space-around;
+`;
 
 const Chart = props => {
   const dataPointValues = props.dataPoints.map(dataPoint => dataPoint.value)
   const totalMaxVal = Math.max(...dataPointValues);
 
   return (
-    <div className="chart">
+    <StyledChart>
       {props.dataPoints.map(dataPoint => 
         <ChartBar key={dataPoint.label}
           value={dataPoint.value} 
@@ -14,7 +19,7 @@ const Chart = props => {
           label={dataPoint.label}
         />
       )}
-    </div>
+    </StyledChart>
   )
 };
 

@@ -1,5 +1,19 @@
 import { useState } from 'react';
-import './ExpenseForm.css';
+import styled from 'styled-components';
+import { StyledButton, StyledButtonCancel } from '../UI/Button';
+
+const ExpenseControlsWrapper = styled.div`
+  display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; text-align: left;
+`,
+
+ExpenseControl = styled.div`
+  label { font-weight: bold; margin-bottom: 0.5rem; display: block; color: #fff; }
+  input { font: inherit; padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; width: 20rem; max-width: 100%; }
+`,
+
+ExpenseActions = styled.div`
+  text-align: right; 
+`;
 
 const ExpenseForm = (props) => {
   const [userInput, setUserInput] = useState({
@@ -33,26 +47,26 @@ const ExpenseForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
+      <ExpenseControlsWrapper>
+        <ExpenseControl>
           <label htmlFor="title-form">Title</label>
           <input value={userInput.title} onChange={titleChangeHandler} type="text" name="title-form" id="title-form" />
-        </div>
+        </ExpenseControl>
 
-        <div className="new-expense__control">
+        <ExpenseControl>
           <label htmlFor="amount-form">Amount</label>
           <input value={userInput.amount} onChange={amountChangeHandler} type="number" name="amount-form" id="amount-form" min="0.01" step="0.01" />
-        </div>
+        </ExpenseControl>
 
-        <div className="new-expense__control">
+        <ExpenseControl>
           <label htmlFor="amount-date">Date</label>
           <input value={userInput.enteredDate} onChange={dateChangeHandler} type="date" name="amount-date" id="amount-date" min="2019-01-01" step="2022-12-31" />
-        </div>
-      </div>
-      <div className="new-expense__actions">
-        <button type="submit" onClick={props.toggleAdding}>Cancel</button>
-        <button type="submit">Add Expense</button>
-      </div>
+        </ExpenseControl>
+      </ExpenseControlsWrapper>
+      <ExpenseActions>
+        <StyledButtonCancel type="submit" onClick={props.toggleAdding}>Cancel</StyledButtonCancel>
+        <StyledButton type="submit">Add Expense</StyledButton>
+      </ExpenseActions>
     </form>
   );
 }
