@@ -1,22 +1,18 @@
 import styled from "styled-components";
 import ExpenseItem from "./ExpenseItem";
 
-const ExpenseList = props => {
+const ExpencesList = styled.ul`
+  padding: 0; list-style: none;
+`, 
+ExpencesListFallBack = styled.h2`
+  color: #fff; text-align: center;
+`;
 
-  const ExpencesList = styled.ul`
-    padding: ${ props.filteredCards.length > 0 ? '0' : null };
-    list-style: ${ props.filteredCards.length > 0 ? 'none' : null };
-    
-    // Стили для as h2
-    color: ${ props.filteredCards.length === 0 ? 'white' : null };
-    text-align: ${ props.filteredCards.length === 0 ? 'center' : null };
-  `;
-  
-  
+const ExpenseList = props => {
   
   // Проверяем наличие контента
   if (props.filteredCards.length === 0) {
-    return <ExpencesList as="h2">No items have been found</ExpencesList>
+    return <ExpencesListFallBack>No items have been found</ExpencesListFallBack>
   }
   
   const itemToRemove = target => props.itemToRemove(target);

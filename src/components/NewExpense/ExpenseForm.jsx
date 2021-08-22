@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { StyledButton, StyledButtonCancel } from '../UI/Button';
+import ErrorModal from '../UI/ErrorModal';
 
 const ExpenseControlsWrapper = styled.div`
   display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; text-align: left;
@@ -23,6 +24,11 @@ const ExpenseForm = (props) => {
     date: ''
   });
 
+  const [error, setError] = useState({
+    title: '',
+    description: ''
+  });
+
   const titleChangeHandler = e => setUserInput(prevState => {
     return { ...prevState, title: e.target.value };
   });
@@ -38,14 +44,37 @@ const ExpenseForm = (props) => {
   // функция сабмита
   const submitHandler = e => {
     e.preventDefault();
-    props.onSaveExpenseData(userInput); // Передаем родителю
     
-    // Обнуляем все, мб есть лучше метод?
-    setUserInput({title: '', amount: '', enteredDate: '', date: ''});
-    props.toggleAdding();
+    if(userInput.title.trim().length === 0) {
+      setError({ title: 'Invalid input', description: 'Title can\'t be empty' });
+    }
+
+    if (+userInput.amount === 0 || +userInput.amount < 0) {
+      setError({ title: 'Invalid number inside of Amount', description: 'Expense amount cannot be less than or equal 0' });
+    }
+
+
+    // зарефакторить, на самом деле не особо нужно
+    if (userInput.enteredDate === '') {
+      setError({ title: 'Date is a required field', description: 'Date cannot be empty, please select date' });
+    }
+
+    if (!error) {
+      props.onSaveExpenseData(userInput); // Передаем родителю
+
+      // Обнуляем все, мб есть лучше метод?
+      setUserInput({title: '', amount: '', enteredDate: '', date: ''});
+      props.toggleAdding();
+    }
   };
 
+  // Закрыть модалку
+  const closeModal = () => setError({ title: '', description: '' });
+
   return (
+    <>
+    {/* чекнуть здесь && */}
+    {error.title && <ErrorModal closeModal={closeModal} title={error.title} content={error.description} modal="1" />}
     <form onSubmit={submitHandler}>
       <ExpenseControlsWrapper>
         <ExpenseControl>
@@ -68,6 +97,7 @@ const ExpenseForm = (props) => {
         <StyledButton type="submit">Add Expense</StyledButton>
       </ExpenseActions>
     </form>
+    </>
   );
 }
 
