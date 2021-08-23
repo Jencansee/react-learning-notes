@@ -41,5 +41,8 @@ React Hooks должны быть использованны внутри гла
 
 3. Использовать [styled-components](https://styled-components.com/docs/basics)
 
-### Заметки по стилям
+
+## Controlled & Uncontrolled components
+<b>Controlled</b> is using ``useState()``, therefore `React` is controlling the state and component, whereas <br>
+<b>Uncotrolled</b>  is using `ref`, i.e it's relying on browser default behavior, and we don't feed anything back to inputs (At least we shouldn't have); <b>It's a rule<b>
   
