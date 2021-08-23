@@ -69,6 +69,7 @@ const ExpenseForm = (props) => {
   const closeModal = () => setError(null);
 
   return (
+    //short syntax for <React.Fragment> below (it doesn’t support keys or attributes)
     <>
     {error && <ErrorModal closeModal={closeModal} title={error.title} content={error.description} modal="1" />}
     <form onSubmit={submitHandler}>

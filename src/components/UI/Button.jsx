@@ -6,6 +6,7 @@ export const StyledButton = styled.button`
   font-size: 1.1rem; color: white; font-weight: 500; border: none;
   background-color: #217F90;
   width: ${props => props.btnWidth ? props.btnWidth : 'fit-content'};
+  margin: ${ props => props.margin || null };
 
   & + & { margin-left: 1rem; }
   &:hover, &:active { background-color: #267481; }
