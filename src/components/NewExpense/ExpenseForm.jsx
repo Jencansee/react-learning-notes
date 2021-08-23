@@ -24,10 +24,7 @@ const ExpenseForm = (props) => {
     date: ''
   });
 
-  const [error, setError] = useState({
-    title: '',
-    description: ''
-  });
+  const [error, setError] = useState();
 
   const titleChangeHandler = e => setUserInput(prevState => {
     return { ...prevState, title: e.target.value };
@@ -47,34 +44,33 @@ const ExpenseForm = (props) => {
     
     if(userInput.title.trim().length === 0) {
       setError({ title: 'Invalid input', description: 'Title can\'t be empty' });
+      return;
     }
 
     if (+userInput.amount === 0 || +userInput.amount < 0) {
       setError({ title: 'Invalid number inside of Amount', description: 'Expense amount cannot be less than or equal 0' });
+      return;
     }
-
 
     // зарефакторить, на самом деле не особо нужно
     if (userInput.enteredDate === '') {
       setError({ title: 'Date is a required field', description: 'Date cannot be empty, please select date' });
+      return;
     }
 
-    if (!error) {
       props.onSaveExpenseData(userInput); // Передаем родителю
 
       // Обнуляем все, мб есть лучше метод?
       setUserInput({title: '', amount: '', enteredDate: '', date: ''});
       props.toggleAdding();
-    }
   };
 
   // Закрыть модалку
-  const closeModal = () => setError({ title: '', description: '' });
+  const closeModal = () => setError(null);
 
   return (
     <>
-    {/* чекнуть здесь && */}
-    {error.title && <ErrorModal closeModal={closeModal} title={error.title} content={error.description} modal="1" />}
+    {error && <ErrorModal closeModal={closeModal} title={error.title} content={error.description} modal="1" />}
     <form onSubmit={submitHandler}>
       <ExpenseControlsWrapper>
         <ExpenseControl>
