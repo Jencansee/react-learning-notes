@@ -44,5 +44,30 @@ React Hooks должны быть использованны внутри гла
 
 ## Controlled & Uncontrolled components
 <b>Controlled</b> is using ``useState()``, therefore `React` is controlling the state and component, whereas <br>
-<b>Uncotrolled</b>  is using `ref`, i.e it's relying on browser default behavior, and we don't feed anything back to inputs (At least we shouldn't have); <b>It's a rule<b>
+<b>Uncotrolled</b>  is using `ref`, i.e it's relying on browser default behavior, and we don't feed anything back to inputs (At least we shouldn't have); <b>It's a rule</b>
   
+## Side Effects
+Here's example of `useEffect()`
+
+```javascript 
+  useEffect(() => {
+    console.log('Execute function');
+    
+    // This is a clean up function
+    return () => {
+      console.log('clean up function does something')
+    };
+
+  
+    }, 
+    
+    [] // <- dependencies
+  );
+```
+
+`useEffect` runs every time after component or dependency is updated.
+Dependencies must be some value, variable, state that would be updated - and cause to run `useEffect()`
+
+If there's empty array of dependencies - useEffect will run once after component is updated (on render cycle).
+
+Clean up function runs before main function except the first time. Very usefull for example to clear timeout.

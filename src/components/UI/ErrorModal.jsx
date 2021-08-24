@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ModalCard from './Card/Card';
+import ModalCard from './Card';
 import { StyledButton } from './Button';
 import { BackDrop } from './Backdrop';
 import ReactDOM from 'react-dom';
