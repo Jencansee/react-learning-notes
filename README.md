@@ -36,10 +36,10 @@ React Hooks должны быть использованны внутри гла
 1. Импортировать CSS файлы, скопятся на весь проект, т.е работают как обычно.<br>
   `import './Button.css'`
 
-2. Импортировать CSS/SCSS modules - не скопятся <br>
+2. Import CSS/SCSS modules - doesn't scope <br>
   `import classes from './Button.module.css'`
 
-3. Использовать [styled-components](https://styled-components.com/docs/basics)
+3. Use [styled-components](https://styled-components.com/docs/basics)
 
 
 ## Controlled & Uncontrolled components
@@ -68,6 +68,6 @@ Here's example of `useEffect()`
 `useEffect` runs every time after component or dependency is updated.
 Dependencies must be some value, variable, state that would be updated - and cause to run `useEffect()`
 
-If there's empty array of dependencies - useEffect will run once after component is updated (on render cycle).
+If there's empty array of dependencies - useEffect will run <b>once</b> after component is updated (on render cycle).
 
 Clean up function runs before main function except the first time. Very usefull for example to clear timeout.

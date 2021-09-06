@@ -78,7 +78,7 @@ const ExpenseForm = props => {
           </ExpenseControl>
         </ExpenseControlsWrapper>
         <ExpenseActions>
-          <StyledButtonCancel type="submit" onClick={props.toggleAdding}>Cancel</StyledButtonCancel>
+          <StyledButtonCancel type="reset" onClick={props.toggleAdding}>Cancel</StyledButtonCancel>
           <StyledButton type="submit">Add Expense</StyledButton>
         </ExpenseActions>
       </form>

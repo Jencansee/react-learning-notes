@@ -11,9 +11,7 @@ const Expenses = props => {
 
   const itemToRemove = target => props.itemToRemove(target);
 
-  const expectedFilterYear = expectedData => {
-    setExpencesYear(expectedData);
-  };
+  const expectedFilterYear = expectedData => setExpencesYear(expectedData);
 
   const filteredCards = props.arr.filter(expense => {
     return expense.date.getFullYear().toString() === expencesYear;
