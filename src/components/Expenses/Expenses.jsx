@@ -1,8 +1,8 @@
 import './Expenses.css';
-import Card from '../UI/Card/Card';
+import Card from '../UI/Card';
 import ExpensesFilter from './ExpensesFIlter';
 import ExpenseList from './ExpenseList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ExpensesChart from './ExpensesChart';
 
 const Expenses = props => {
@@ -11,14 +11,15 @@ const Expenses = props => {
 
   const itemToRemove = target => props.itemToRemove(target);
 
-  const expectedFilterYear = expectedData => {
-    setExpencesYear(expectedData);
-  };
+  const expectedFilterYear = expectedData => setExpencesYear(expectedData);
 
   const filteredCards = props.arr.filter(expense => {
     return expense.date.getFullYear().toString() === expencesYear;
   })
 
+  useEffect(() => {
+    console.log('useEffect');
+  });
   return (
     <Card className="expenses"> 
       <ExpensesFilter selected={expencesYear} onPassingExpensesYear={expectedFilterYear} />
